@@ -1,6 +1,6 @@
 # bundler
-require 'rubygems'
-require 'bundler'
+require "rubygems"
+require "bundler"
 begin
   Bundler.require(:default)
 rescue Bundler::GemNotFound => e
@@ -10,7 +10,8 @@ rescue Bundler::GemNotFound => e
 end
 
 # environment
-environment = ENV['ENV'] || "development"
+environment = ENV["ENV"] || "development"
+ENV["ROOT"] = Dir.pwd
 
 # redis
 redis_config = YAML.load(File.open(Dir.pwd + "/config/redis.yml"))[environment]
@@ -21,7 +22,7 @@ database_config = YAML.load(File.open(Dir.pwd + "/config/database.yml"))[environ
 ActiveRecord::Base.establish_connection(database_config)
 
 # models
-Dir[Dir.pwd + "/models/**/*.rb"].each {|file| p file; require file }
+Dir[Dir.pwd + "/models/**/*.rb"].each {|file| require file }
 
 # job
-require 'job'
+require "job"
