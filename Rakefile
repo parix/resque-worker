@@ -5,7 +5,7 @@ require "init"
 namespace :resque do
   task :stop_workers do
     pids = []
-    queues = ["job"]
+    queues = ENV["QUEUE"].split(",")
 
     Resque.workers.each do |worker|
       queues.each do |queue|

@@ -1,5 +1,5 @@
 class Job < Resque::Plugins::RestrictionJob
-  @queue = :job
+  @queue = ENV["QUEUE"].split(",")
 
   def self.perform(args)
   end
